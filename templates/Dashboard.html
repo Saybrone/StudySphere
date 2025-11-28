@@ -1,1 +1,66 @@
-<h1>Welcome to your dashboard!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2 class="logo">StudySphere</h2>
+        <nav class="nav">
+            <a class="nav-item active" href="#">Dashboard</a>
+            <a class="nav-item" href="/my-notes">My Notes</a>
+
+            <a class="nav-item" href="#">AI Tools</a>
+            <a class="nav-item" href="#">Search Notes</a>
+            <a class="nav-item" href="#">Settings</a>
+        </nav>
+
+        <a href="/logout" class="logout">Logout</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <header class="header">
+            <h1>Welcome, {{ email }}</h1>
+
+            <div class="profile">
+                <img src="/static/img/user.png" alt="profile">
+            </div>
+        </header>
+
+        <!-- CARDS -->
+        <section class="cards">
+            <div class="card">
+                <h3>Quick Notes</h3>
+                <p>Create, organize and share your study notes.</p>
+                <button class="btn">Open</button>
+            </div>
+
+            <div class="card">
+                <h3>AI Assistant</h3>
+                <p>Ask questions, summarize, generate study material.</p>
+                <button class="btn">Start</button>
+            </div>
+
+            <div class="card">
+                <h3>Search Notes</h3>
+                <p>View notes that other learners share.</p>
+                <button class="btn">View</button>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="/static/js/dashboard.js"></script>
+</body>
+</html>

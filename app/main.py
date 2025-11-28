@@ -90,7 +90,7 @@ def signup(
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return {"message": "User created"}
+    return RedirectResponse("/login-page")
 
 @app.post("/login")
 def login(
@@ -127,3 +127,4 @@ def dashboard(request: Request, access_token: str = Cookie(None)):
         return RedirectResponse("/login-page")
 
     return templates.TemplateResponse("Dashboard.html", {"request": request, "email": user_email})
+

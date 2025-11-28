@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notes</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='notes.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="title">My Notes</h1>
+
+        <!-- Create Note Form -->
+        <form method="post" action="/notes/create" class="note-form">
+            <input type="text" name="title" placeholder="Note Title" required>
+            <textarea name="content" placeholder="Write your note..." required></textarea>
+            <button type="submit">Add Note</button>
+        </form>
+
+        <h2 class="subtitle">Your Notes</h2>
+
+        <div class="notes-grid">
+            {% for note in notes %}
+            <div class="note-card">
+                <h3>{{ note.title }}</h3>
+                <p>{{ note.content }}</p>
+
+                <form action="/notes/delete/{{ note.id }}" method="post">
+                    <button class="delete-btn">Delete</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
