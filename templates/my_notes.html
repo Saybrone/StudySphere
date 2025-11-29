@@ -4,35 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Notes</title>
-    <link rel="stylesheet" href="{{ url_for('static', path='notes.css') }}">
+    <link rel="stylesheet" href="/static/mynotes.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1 class="title">My Notes</h1>
+<div class="container">
 
-        <!-- Create Note Form -->
-        <form method="post" action="/notes/create" class="note-form">
-            <input type="text" name="title" placeholder="Note Title" required>
-            <textarea name="content" placeholder="Write your note..." required></textarea>
-            <button type="submit">Add Note</button>
-        </form>
+    <h1 class="title">My Notes</h1>
 
-        <h2 class="subtitle">Your Notes</h2>
+    <!-- CREATE NEW NOTE -->
+    <form method="post" action="/notes/create" enctype="multipart/form-data" class="note-form">
 
-        <div class="notes-grid">
-            {% for note in notes %}
-            <div class="note-card">
-                <h3>{{ note.title }}</h3>
-                <p>{{ note.content }}</p>
+        <!-- Title -->
+        <input type="text" name="title" placeholder="Note Title" required>
 
-                <form action="/notes/delete/{{ note.id }}" method="post">
-                    <button class="delete-btn">Delete</button>
-                </form>
-            </div>
-            {% endfor %}
+        <!-- Content -->
+        <textarea name="content" placeholder="Write your note..." required></textarea>
+
+        <!-- FILE ROW -->
+        <div class="file-row">
+            <input 
+                type="file" 
+                name="file" 
+                id="fileInput"
+                hidden
+            >
+
+            <!-- Attach File Button -->
+            <button type="button" class="attach-btn" onclick="document.getElementById('fileInput').click();">
+                Attach File
+            </button>
+
+            <!-- Selected File Name -->
+            <span id="file-name" class="file-name">No file selected</span>
         </div>
+
+        <!-- Add Note Button -->
+        <button type="submit" class="upload-btn">Add Note</button>
+    </form>
+
+    <!-- NOTES LIST -->
+    <h2 class="subtitle">Your Notes</h2>
+
+    <div class="notes-grid">
+        {% for note in notes %}
+        <div class="note-card">
+
+            <h3>{{ note.title }}</h3>
+            <p>{{ note.content }}</p>
+
+            {% if note.file_path %}
+                <a class="file-link" href="/{{ note.file_path }}" download>
+                    Download Attachment
+                </a>
+            {% endif %}
+
+            <form action="/notes/delete/{{ note.id }}" method="post" class="card-actions">
+                <button class="delete-btn">Delete</button>
+            </form>
+
+        </div>
+        {% endfor %}
     </div>
+
+</div>
+
+<script>
+    // Update file name preview
+    document.getElementById("fileInput").addEventListener("change", function () {
+        const label = document.getElementById("file-name");
+        label.textContent = this.files.length ? this.files[0].name : "No file selected";
+    });
+</script>
 
 </body>
 </html>
