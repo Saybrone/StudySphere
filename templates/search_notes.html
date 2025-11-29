@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Notes</title>
+    <link rel="stylesheet" href="/static/searchnotes.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1 class="title">Search Notes</h1>
+
+    <!-- SEARCH FORM -->
+    <form method="get" action="/notes/search" class="search-form">
+        <input 
+            type="text" 
+            name="q" 
+            placeholder="Search your notes..." 
+            class="search-input" 
+        >
+        <button class="search-btn">Search</button>
+    </form>
+
+    <!-- RESULTS SECTION -->
+    {% if results is defined %}
+        <h2 class="subtitle">Results</h2>
+
+        {% if results|length == 0 %}
+            <p class="no-results">No notes found.</p>
+        {% else %}
+        <div class="notes-grid">
+            {% for note in results %}
+            <div class="note-card">
+                <h3>{{ note.title }}</h3>
+                <p>{{ note.content[:150] }}{% if note.content|length > 150 %}...{% endif %}</p>
+
+                {% if note.file_path %}
+                <a href="/{{ note.file_path }}" class="file-link" download>
+                    Download Attachment
+                </a>
+                {% endif %}
+
+                <a href="/notes/view/{{ note.id }}" class="open-btn">Open</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    color: white;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.container {
+    width: 600px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* SEARCH BAR */
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    backdrop-filter: blur(10px);
+    outline: none;
+}
+
+.search-btn {
+    padding: 12px 20px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px);
+    color: white;
+    transition: 0.25s;
+}
+
+.search-btn:hover {
+    background: rgba(255,255,255,0.30);
+    transform: scale(1.05);
+}
+
+/* RESULTS */
+.subtitle {
+    margin-top: 30px;
+}
+
+.no-results {
+    opacity: 0.7;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* NOTES GRID */
+.notes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.note-card {
+    padding: 20px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+.note-card h3 {
+    margin-top: 0;
+}
+
+.file-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #93c5fd;
+    text-decoration: underline;
+}
+
+/* Open Button */
+.open-btn {
+    margin-top: 15px;
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.18);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.25s;
+    text-decoration: none;
+}
+
+.open-btn:hover {
+    background: rgba(255,255,255,0.30);
+    transform: scale(1.05);
+}

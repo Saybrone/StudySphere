@@ -209,3 +209,29 @@ def delete_note(
     db.delete(note)
     db.commit()
     return RedirectResponse("/my-notes", status_code=303)
+
+@app.get("/notes/search", response_class=HTMLResponse)
+def search_notes(
+    request: Request,
+    q: str | None = None,
+    db: Session = Depends(get_db),
+    user: User = Depends(get_current_user)
+):
+    if not q or q.strip() == "":
+        results = db.query(Note).all()
+
+    else:
+        search_term = f"%{q}%"
+        results = db.query(Note).filter(
+            (Note.title.ilike(search_term)) |
+            (Note.content.ilike(search_term))
+        ).all()
+
+    return templates.TemplateResponse(
+        "search_notes.html",
+        {
+            "request": request,
+            "results": results,
+            "query": q if q else ""
+        }
+    )
