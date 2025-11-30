@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-multipart
+jinja2
+passlib
+argon2-cffi
+python-jose
+python-dotenv
+pydantic
+itsdangerous
+aiofiles
