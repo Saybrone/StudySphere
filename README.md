@@ -59,7 +59,7 @@ While studying students face issues like:
 - Unorganized notes on different devices
 - No lesson notes on internet
 - Hard-to-search study material 
-- No platform to share notes with close and long distance
+- No platform to share notes with close and long distance friends
 
 
 **StudySphere aims to solve these by:**
