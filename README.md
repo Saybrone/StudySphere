@@ -141,7 +141,6 @@ Dashboard includes:
 - Navigation to notes  
 - Buttons for:
   - My Notes  
-  - Create Note  
   - Search Notes  
 - Glass-style containers  
 - Email-based greeting  
