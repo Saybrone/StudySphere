@@ -226,7 +226,9 @@ Important: Because it is free trial of render, notes will be deleted after serve
 
 **[Try Now](https://studysphere-0jqu.onrender.com/)**
 
-  https://studysphere-0jqu.onrender.com/
+**https://studysphere-0jqu.onrender.com/**
+  
+  It may take server 1-2 minutes to wake up
 
 ## FutureGoals <a class="anchor" id="FutureGoals"></a>
 
@@ -245,7 +247,7 @@ Planned improvements:
 StudySphere aims to:
 - Help students stay organized  
 - Improve knowledge sharing  
-- Reduce friction in note-taking  
+- Reduce problems in note-taking  
 - Provide a modern academic workspace  
 - Support and encourage collaboration at education 
 
