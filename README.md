@@ -61,6 +61,7 @@ The initial goal is to create a modern, light, scalable platform for student col
 
 # How It Works/Tech Stack <a class="anchor" id="Tech"></a>
 
+<img src="Flowchart.jpg" alt="Flowchart.jpg" width="3000">
 
 
 
