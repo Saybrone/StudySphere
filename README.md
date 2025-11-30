@@ -6,6 +6,7 @@ An open platform for students to share their knowledge and collaborate.
 # Table of Contents
 - [Project Structure](#Project-Structure)
 - [Problem & Objective](#Problem-Objective)
+- [Key Features](Key-Features)
 - [How It Works/Tech Stack](#Tech)
 - [Backend](#Backend)
   - [FastAPI](#FastAPI)
@@ -43,7 +44,7 @@ StudySphere/
 ├── LICENSE                 
 └── README.md             
 ```
-# Key Features  
+# Key Features  <a class="anchor" id="Key-Features"></a>
 - **Dashboard** — clean overview of user activity  
 - **Note Creation** — write and save notes instantly  
 - **File Attachments** — upload documents to your notes  
