@@ -12,16 +12,13 @@
 
     <h1 class="title">My Notes</h1>
 
-    <!-- CREATE NEW NOTE -->
     <form method="post" action="/notes/create" enctype="multipart/form-data" class="note-form">
 
-        <!-- Title -->
+
         <input type="text" name="title" placeholder="Note Title" required>
 
-        <!-- Content -->
         <textarea name="content" placeholder="Write your note..." required></textarea>
 
-        <!-- FILE ROW -->
         <div class="file-row">
             <input 
                 type="file" 
@@ -30,20 +27,16 @@
                 hidden
             >
 
-            <!-- Attach File Button -->
             <button type="button" class="attach-btn" onclick="document.getElementById('fileInput').click();">
                 Attach File
             </button>
 
-            <!-- Selected File Name -->
             <span id="file-name" class="file-name">No file selected</span>
         </div>
 
-        <!-- Add Note Button -->
         <button type="submit" class="upload-btn">Add Note</button>
     </form>
 
-    <!-- NOTES LIST -->
     <h2 class="subtitle">Your Notes</h2>
 
     <div class="notes-grid">
@@ -70,7 +63,6 @@
 </div>
 
 <script>
-    // Update file name preview
     document.getElementById("fileInput").addEventListener("change", function () {
         const label = document.getElementById("file-name");
         label.textContent = this.files.length ? this.files[0].name : "No file selected";

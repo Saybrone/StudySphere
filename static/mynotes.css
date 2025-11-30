@@ -1,14 +1,9 @@
-/* ===========================
-   Glassmorphic My Notes - notes.css
-   =========================== */
-
-/* --- Page / Container --- */
 :root{
   --glass-bg: rgba(255,255,255,0.10);
   --glass-border: rgba(255,255,255,0.18);
   --muted: #cbd5e1;
-  --accent: #60a5fa; /* blue */
-  --accent-2: #7ee787; /* green */
+  --accent: #60a5fa;
+  --accent-2: #7ee787;
   --danger: #ef4444;
   --card-shadow: 0 8px 30px rgba(2,6,23,0.45);
 }
@@ -27,7 +22,7 @@ body{
   padding: 36px;
 }
 
-/* Centered card container */
+
 .container{
   width: 96%;
   max-width: 980px;
@@ -40,7 +35,7 @@ body{
   box-shadow: var(--card-shadow);
 }
 
-/* Page title */
+
 .title{
   margin: 0 0 18px 0;
   font-size: 28px;
@@ -49,7 +44,6 @@ body{
   color: #f8fafc;
 }
 
-/* --- Note creation form --- */
 .note-form{
   display:block;
   width:100%;
@@ -59,8 +53,6 @@ body{
   border: 1px solid var(--glass-border);
   margin-bottom: 26px;
 }
-
-/* Inputs */
 .note-form input[type="text"],
 .note-form textarea {
   width:100%;
@@ -81,14 +73,12 @@ body{
   border-color: rgba(96,165,250,0.35);
 }
 
-/* textarea sizing */
 .note-form textarea{
   min-height:110px;
   resize: vertical;
   margin-top:10px;
 }
 
-/* --- File row (browse & attach) --- */
 .file-row{
   display:flex;
   gap:12px;
@@ -97,12 +87,10 @@ body{
   flex-wrap:wrap;
 }
 
-/* hide real file input */
 input[type="file"]{
   display:none;
 }
 
-/* glass button base */
 .glass-btn, .attach-btn {
   appearance: none;
   -webkit-appearance: none;
@@ -120,25 +108,21 @@ input[type="file"]{
   transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
 }
 
-/* hover */
 .glass-btn:hover, .attach-btn:hover{
   transform: translateY(-3px);
   background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.07));
   box-shadow: 0 10px 28px rgba(2,6,23,0.55);
 }
 
-/* subtle accent for primary browse */
 .glass-btn{
   border-image: linear-gradient(90deg, rgba(96,165,250,0.6), rgba(124,58,237,0.45)) 1;
 }
 
-/* attach button variant (slightly green) */
 .attach-btn{
   background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
   border: 1px solid rgba(255,255,255,0.07);
 }
 
-/* file name label */
 #file-name, .file-name {
   color: var(--muted);
   font-size: 14px;
@@ -147,7 +131,6 @@ input[type="file"]{
   opacity: 0.95;
 }
 
-/* small helper: hide long filename overflow */
 .file-name{
   max-width: 52ch;
   white-space: nowrap;
@@ -155,7 +138,6 @@ input[type="file"]{
   text-overflow: ellipsis;
 }
 
-/* --- Submit / Upload button --- */
 .upload-btn{
   display:block;
   width:100%;
@@ -177,14 +159,12 @@ input[type="file"]{
   box-shadow: 0 14px 36px rgba(59,130,246,0.22);
 }
 
-/* --- Notes grid / cards --- */
 .notes-grid{
   display:grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 18px;
 }
 
-/* single card */
 .note-card{
   padding: 16px;
   border-radius: 12px;
@@ -199,7 +179,6 @@ input[type="file"]{
   min-height: 150px;
 }
 
-/* card title and body */
 .note-card h3{
   margin:0 0 10px 0;
   font-size:18px;
@@ -214,7 +193,6 @@ input[type="file"]{
   white-space: pre-wrap;
 }
 
-/* file link */
 .file-link{
   display:inline-block;
   text-decoration:none;
@@ -228,7 +206,6 @@ input[type="file"]{
   border: 1px solid rgba(126,231,135,0.12);
 }
 
-/* delete button */
 .delete-btn{
   background: linear-gradient(180deg, rgba(239,68,68,0.95), rgba(220,38,38,0.95));
   color: #fff;
@@ -246,7 +223,6 @@ input[type="file"]{
   box-shadow: 0 8px 24px rgba(239,68,68,0.18);
 }
 
-/* small utility: action row inside card */
 .card-actions{
   display:flex;
   gap:10px;
@@ -254,7 +230,6 @@ input[type="file"]{
   align-items:center;
 }
 
-/* responsive tweaks */
 @media (max-width: 720px){
   .container{ padding:18px; }
   .title{ font-size:22px; }
@@ -262,7 +237,6 @@ input[type="file"]{
   .file-row{ gap:10px; }
 }
 
-/* accessibility focus outlines */
 .glass-btn:focus, .attach-btn:focus, .upload-btn:focus, .delete-btn:focus{
   outline: 3px solid rgba(96,165,250,0.18);
   outline-offset: 3px;

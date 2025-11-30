@@ -158,7 +158,7 @@ def my_notes_page(request: Request, user=Depends(get_current_user), db: Session 
 async def create_note(
     title: str = Form(...),
     content: str = Form(...),
-    file: UploadFile = File(None),   # <--- Add this
+    file: UploadFile = File(None),
     user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
