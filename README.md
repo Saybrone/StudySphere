@@ -1,7 +1,7 @@
 # StudySphere
-PITCH Presentation ---> https://youtu.be/EL3v3puFZAk
 An open platform for students to share their knowledge and collaborate.
 
+PITCH Presentation ---> https://youtu.be/EL3v3puFZAk
 <img src="static/Logo.png" alt="StudySphere" width="300">
 
 # Table of Contents
