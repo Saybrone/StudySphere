@@ -6,7 +6,6 @@ An open platform for students to share their knowledge and collaborate.
 # Table of Contents
 - [Project Structure](#Project-Structure)
 - [Problem & Objective](#Problem-Objective)
-- [Features](#Features)
 - [How It Works/Tech Stack](#Tech)
 - [Backend](#Backend)
   - [FastAPI](#FastAPI)
@@ -60,13 +59,14 @@ While studying students face issues like:
 
 The initial goal is to create a modern, light, scalable platform for student collaboration and study material organization.
 
+# How It Works/Tech Stack <a class="anchor" id="Tech"></a>
 
-# Problem & Objective <a class="anchor" id="Problem-Objective"></a>
+
 
 
 # Backend <a class="anchor" id="Backend"></a>
 
-The backend is designed to be fast, secure, and scalable, using by FastAPI.
+The backend is designed to be fast, secure, and scalable, using FastAPI.
 
 ## FastAPI <a class="anchor" id="FastAPI"></a>
 
