@@ -6,7 +6,7 @@ An open platform for students to share their knowledge and collaborate.
 # Table of Contents
 - [Project Structure](#Project-Structure)
 - [Problem & Objective](#Problem-Objective)
-- [Key Features](Key-Features)
+- [Key Features](#Key-Features)
 - [How It Works/Tech Stack](#Tech)
 - [Backend](#Backend)
   - [FastAPI](#FastAPI)
