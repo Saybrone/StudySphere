@@ -1,11 +1,13 @@
 # StudySphere
 An open platform for students to share their knowledge and collaborate.
 
-<img src="static/Logo.png" alt="NucleoScope" width="300">
+<img src="static/Logo.png" alt="StudySphere" width="300">
 
 # Table of Contents
 - [Project Structure](#Project-Structure)
 - [Problem & Objective](#Problem-Objective)
+- [Features](#Features)
+- [How It Works/Tech Stack](#Tech)
 - [Backend](#Backend)
   - [FastAPI](#FastAPI)
   - [SQL Alchemy](#SQL-Alchemy)
@@ -19,7 +21,29 @@ An open platform for students to share their knowledge and collaborate.
 - [Impact](#Impact)
 - [License](#license)
 
-
+# Project Structure <a class="anchor" id="Project-Structure"></a>
+```
+StudySphere/
+├── app/
+│ ├── main.py
+│ ├── models.py
+│ └── database.py  
+├── templates/
+│ ├── Dashboard.html
+│ ├── login.html
+│ ├── my_notes.html
+│ ├── search_notes.html
+│ └── signup.html 
+├── static/
+│ ├── Authentication.css
+│ ├── Logo.png
+│ ├── dashboard.css
+│ ├── mynotes.css
+│ └── searchnotes.css                    
+├── requirements.txt                            
+├── LICENSE                 
+└── README.md             
+```
 # Problem & Objective <a class="anchor" id="Problem-Objective"></a>
 
 Students face issues like:
