@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException, Request, Form, Cookie, UploadFile, File
-from fastapi.responses import HTMLResponse,RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
@@ -15,9 +15,10 @@ from jose import JWTError, jwt
 from fastapi.staticfiles import StaticFiles
 import os
 
-
+# Create FastAPI app
 app = FastAPI()
 
+# Enable CORS for all origins (development friendly)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -25,25 +26,36 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mount static directory for CSS/JS/images
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+# Load templates directory for Jinja2 HTML templates
 templates = Jinja2Templates(directory="templates")
-os.makedirs("uploads", exist_ok=True)
 
+# Ensure uploads folder exists
+os.makedirs("uploads", exist_ok=True)
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
+# JWT configuration
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 
+# Password hashing configuration (Argon2)
 pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 
+# Create tables automatically if not exist
 Base.metadata.create_all(bind=engine)
 
-
+# Database dependency (opens and closes DB session)
 def get_db(): 
     db = SessionLocal() 
-    try: yield db 
-    finally: db.close()
+    try:
+        yield db 
+    finally:
+        db.close()
+
+# Authentication helper: gets current logged-in user based on cookie token
 def get_current_user(
     access_token: str = Cookie(None), 
     db: Session = Depends(get_db)
@@ -52,42 +64,46 @@ def get_current_user(
         raise HTTPException(status_code=401, detail="Not authenticated")
 
     try:
+        # Decode JWT to extract email
         payload = jwt.decode(access_token, SECRET_KEY, algorithms=[ALGORITHM])
         email = payload.get("sub")
     except:
         raise HTTPException(status_code=401, detail="Invalid token")
 
+    # Find user in database
     user = db.query(User).filter(User.email == email).first()
     if not user:
         raise HTTPException(status_code=401, detail="User not found")
 
     return user
 
+# Hash password using SHA-256 before Argon2
 def safe_password(password: str) -> str:
     return hashlib.sha256(password.encode("utf-8")).hexdigest()
 
-
-
+# Create JWT token for 60 minutes
 def create_access_token(data: dict):
     expire = datetime.utcnow() + timedelta(minutes=60)
     to_encode = data.copy()
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-
+# Redirect root page → login page
 @app.get("/", response_class=HTMLResponse)
 def read_root(request: Request):
     return RedirectResponse("/login-page")
 
+# Render login page
 @app.get("/login-page", response_class=HTMLResponse)
 def open_login_page(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
 
+# Render signup page
 @app.get("/signup-page", response_class=HTMLResponse)
 def open_signup_page(request: Request):
     return templates.TemplateResponse("signup.html", {"request": request})
 
-
+# Signup route (creates user)
 @app.post("/signup")
 def signup(
     username: str = Form(...),
@@ -95,48 +111,65 @@ def signup(
     password: str = Form(...),
     db: Session = Depends(get_db),
 ):
+    # Secure password (sha256 + argon2)
     safe = safe_password(password)
+
+    # Prevent duplicate email
     existing_email = db.query(User).filter(User.email == email).first()
     if existing_email:
         raise HTTPException(status_code=400, detail="Email already exists")
+
+    # Prevent duplicate username
     existing_username = db.query(User).filter(User.username == username).first()
     if existing_username:
         raise HTTPException(status_code=400, detail="Username already taken")
+
+    # Hash and store password
     hashed_password = pwd_context.hash(safe)
     new_user = User(
         username=username,
         email=email,
         password=hashed_password
     )
+    
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
+
     return RedirectResponse("/login-page", status_code=303)
 
+# Login route (verifies credentials + creates token)
 @app.post("/login")
 def login(
-    
     email: str = Form(...),
     password: str = Form(...),
     db: Session = Depends(get_db)
 ):
     clean_password = safe_password(password)
+
     user = db.query(User).filter(User.email == email).first()
+
+    # Verify credentials
     if not user or not pwd_context.verify(clean_password, user.password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
+    # Generate token
     token = create_access_token({"sub": user.email})
+
+    # Set auth cookie
     response = RedirectResponse(url="/dashboard", status_code=303)
     response.set_cookie(key="access_token", value=token, httponly=True)
+
     return response
 
-
+# Logout (delete cookie)
 @app.get("/logout")
 def logout():
     response = RedirectResponse("/login-page")
     response.delete_cookie("access_token")
     return response
 
+# Dashboard page (requires login)
 @app.get("/dashboard", response_class=HTMLResponse)
 def dashboard(request: Request, user=Depends(get_current_user)):
     return templates.TemplateResponse(
@@ -144,7 +177,7 @@ def dashboard(request: Request, user=Depends(get_current_user)):
         {"request": request, "email": user.email}
     )
 
-
+# Notes page (lists all user notes)
 @app.get("/my-notes", response_class=HTMLResponse)
 def my_notes_page(request: Request, user=Depends(get_current_user), db: Session = Depends(get_db)):
     notes = db.query(Note).filter(Note.user_id == user.id).all()
@@ -153,7 +186,7 @@ def my_notes_page(request: Request, user=Depends(get_current_user), db: Session 
         {"request": request, "email": user.email, "notes": notes}
     )
 
-
+# Create a note (with optional file upload)
 @app.post("/notes/create")
 async def create_note(
     title: str = Form(...),
@@ -164,6 +197,7 @@ async def create_note(
 ):
     file_path = None
 
+    # Save uploaded file if exists
     if file:
         upload_dir = "uploads"
         os.makedirs(upload_dir, exist_ok=True)
@@ -173,6 +207,7 @@ async def create_note(
         with open(file_path, "wb") as buffer:
             buffer.write(await file.read())
 
+    # Save note in database
     note = Note(
         title=title,
         content=content,
@@ -185,12 +220,14 @@ async def create_note(
 
     return RedirectResponse("/my-notes", status_code=303)
 
+# Delete a note (and attached file)
 @app.post("/notes/delete/{note_id}")
 def delete_note(
     note_id: int,
     user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
+    # Fetch user-specific note
     note = db.query(Note).filter(
         Note.id == note_id,
         Note.user_id == user.id
@@ -198,18 +235,20 @@ def delete_note(
 
     if not note:
         raise HTTPException(status_code=404, detail="Note not found")
+
+    # Remove file if exists
     if note.file_path:
-        print(note.file_path)
         file_full_path = note.file_path
         if os.path.exists(file_full_path):
             os.remove(file_full_path)
-            print("Ok")
-        else:
-            print("not Ok")
+
+    # Remove DB record
     db.delete(note)
     db.commit()
+
     return RedirectResponse("/my-notes", status_code=303)
 
+# Search notes by title or content
 @app.get("/notes/search", response_class=HTMLResponse)
 def search_notes(
     request: Request,
@@ -217,10 +256,11 @@ def search_notes(
     db: Session = Depends(get_db),
     user: User = Depends(get_current_user)
 ):
+    # If no query → return all notes
     if not q or q.strip() == "":
         results = db.query(Note).all()
-
     else:
+        # Case-insensitive partial match
         search_term = f"%{q}%"
         results = db.query(Note).filter(
             (Note.title.ilike(search_term)) |
