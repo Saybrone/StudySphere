@@ -45,21 +45,23 @@ StudySphere/
 └── README.md             
 ```
 # Problem & Objective <a class="anchor" id="Problem-Objective"></a>
+While studying students face issues like:
 
-Students face issues like:
-- Notes scattered across devices  
-- No collaboration-friendly platform  
-- Hard-to-search study material  
-- Manual file management  
+- Unorganized notes on different devices
+- No lesson notes on internet
+- Hard-to-search study material 
+- No platform to share notes with close and long distance
 
-**StudySphere solves this by:**
-- Centralized note creation  
-- File attachments  
-- Smart search  
-- Clean dashboard  
-- Secure user authentication  
 
-The goal is to create a modern, light, scalable platform for student collaboration and study material organization.
+**StudySphere aims to solve these by:**
+- Creating an open platform where students can upload notes
+- Providing a clean UI to orginize notes
+- Allowing students to reach and share every registered note
+
+The initial goal is to create a modern, light, scalable platform for student collaboration and study material organization.
+
+
+# Problem & Objective <a class="anchor" id="Problem-Objective"></a>
 
 
 # Backend <a class="anchor" id="Backend"></a>
