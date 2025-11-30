@@ -43,6 +43,15 @@ StudySphere/
 ├── LICENSE                 
 └── README.md             
 ```
+# Key Features  
+- **Dashboard** — clean overview of user activity  
+- **Note Creation** — write and save notes instantly  
+- **File Attachments** — upload documents to your notes  
+- **Secure Authentication** — login/signup with encrypted credentials  
+- **Search System** — find notes by keywords in title or content  
+- **Production Ready Architecture** — ready to support many users  
+- **Cloud-Based Storage** — powered by NeonDB & FastAPI
+
 # Problem & Objective <a class="anchor" id="Problem-Objective"></a>
 While studying students face issues like:
 
@@ -62,6 +71,16 @@ The initial goal is to create a modern, light, scalable platform for student col
 # How It Works/Tech Stack <a class="anchor" id="Tech"></a>
 
 <img src="Flowchart.jpg" alt="Flowchart.jpg" width="3000">
+
+## Tech Stack
+- Python 3.13
+- HTML
+- CSS
+- FastAPI
+- SqlAlchemy
+- NeonDB
+- PostgreSQL
+
 
 
 
@@ -141,6 +160,7 @@ Dashboard includes:
 - Navigation to notes  
 - Buttons for:
   - My Notes  
+  - Create Note  
   - Search Notes  
 - Glass-style containers  
 - Email-based greeting  
@@ -188,3 +208,68 @@ Passwords are:
 
 # Deployment
 
+To deploy StudySphere:
+
+### 0. Set A NeonDB project
+### 1. Configure environment variables
+.env:
+```
+SECRET_KEY=your-secret-key
+DATABASE_URL=postgresql://user:pass@host/db
+```
+### 2. Install dependencies  
+run: ```pip install -r requirements.txt```
+
+### 3. Run FastAPI  
+run: ```python -m uvicorn main:app --host 0.0.0.0 --port 8000```
+
+## If you want to try Full Website, use already deployed model:
+Important: Because it is free trial of render, notes will be deleted after server sleeps
+
+**[Try Now](https://studysphere-0jqu.onrender.com/)**
+
+  https://studysphere-0jqu.onrender.com/
+
+## FutureGoals <a class="anchor" id="FutureGoals"></a>
+
+Planned improvements:
+- Better UI animations  
+- Creating view pages for notes  
+- Tasks & reminders system  
+- Private Note sharing between users  
+- Real-time chat between students  
+- Profile customization  
+- AI assistant to help stundents while reading notes
+- **Full Deployment using Amazon VPS hosting**
+  
+## Impact <a class="anchor" id="Impact"></a>
+
+StudySphere aims to:
+- Help students stay organized  
+- Improve knowledge sharing  
+- Reduce friction in note-taking  
+- Provide a modern academic workspace  
+- Support and encourage collaboration at education 
+
+The platform is built with education and accessibility as its core.
+
+
+## License
+
+```
+GNU General Public License v3.0
+
+Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
