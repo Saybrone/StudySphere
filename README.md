@@ -140,8 +140,6 @@ Benefits:
 - Always-free tier  
 - PostgreSQL-compatible  
 
-Local development uses SQLite; production uses NeonDB via environment variables.
-
 
 # Frontend <a class="anchor" id="Frontend"></a>
 
